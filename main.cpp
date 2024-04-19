@@ -18,7 +18,7 @@ int main() {
 	printf("半なら1,丁なら2を入力してください\n");
 	scanf_s("%d", &num);
 
-	SetTimeout(p, 5);
+	SetTimeout(p, 5000);
 	printf("サイコロの目は%d", num2);
 
 	if ((num % 2) == (num2 % 2)) {
@@ -32,10 +32,10 @@ int main() {
 }
 
 void DispResult(int* s) {
-	printf("%d秒待った\n", *s);
+	printf("%d秒待った\n", *s / 1000);
 }
 
 void SetTimeout(pFunc p, int second) {
-	Sleep(second * 1000);
+	Sleep(second);
 	p(&second);
 }
