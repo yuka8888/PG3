@@ -19,14 +19,16 @@ int main() {
 	scanf_s("%d", &num);
 
 	SetTimeout(p, 5000);
-	printf("サイコロの目は%d", num2);
+	printf("サイコロの目は%d\n", num2);
 
-	if ((num % 2) == (num2 % 2)) {
-		printf("正解\n");
-	}
-	else {
-		printf("不正解\n");
-	}
+	[=]() {
+		if ((num % 2) == (num2 % 2)) {
+			printf("正解\n");
+		}
+		else {
+			printf("不正解\n");
+		}
+		}();
 
 	return 0;
 }
