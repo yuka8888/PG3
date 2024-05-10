@@ -4,24 +4,26 @@
 #include<time.h>
 
 typedef void (*pFunc)(int *);
-void DispResult(int* s);
-void SetTimeout(pFunc p, int second);
+void DispResult(int* second);
+void SetTimeout(pFunc timer, int second);
 
 int main() {
-	unsigned int currentTime = time(nullptr);
-	srand(currentTime);
+	unsigned int currentTime = (unsigned int)time(nullptr);	srand(currentTime);
 
-	//関数ポインタ
-	pFunc p = DispResult;
+	//変数に関数を入れる
+	pFunc dispResult = DispResult;
 
 	int num = 0, num2 = rand() % 6 + 1;
 
-	//値の入力
-	printf("半なら1,丁なら2を入力してください\n");
-	scanf_s("%d", &num);
+	//1か2が入力されるまで無限ループ
+	while (num != 1 && num != 2) {
+		//値の入力
+		printf("半なら1,丁なら2を入力してください\n");
+		scanf_s("%d", &num);
+	}
 
 	//関数の呼び出し
-	SetTimeout(p, 5000);
+	SetTimeout(dispResult, 3000);
 	printf("サイコロの目は%d\n", num2);
 
 	//ラムダ式で答えの出力
@@ -41,12 +43,12 @@ int main() {
 }
 
 //待った時間の出力
-void DispResult(int* s) {
-	printf("%d秒待った\n", *s / 1000);
+void DispResult(int* second) {
+	printf("%d秒待った\n", *second / 1000);
 }
 
 //引数の時間分待つ関数
-void SetTimeout(pFunc p, int second) {
+void SetTimeout(pFunc timer, int second) {
 	Sleep(second);
-	p(&second);
+	timer(&second);
 }
