@@ -1,20 +1,19 @@
 ﻿#include <stdio.h>
-#include "Animal.h"
-#include "Dog.h"
-#include "Cat.h"
+#include "Ishape.h"
+#include "Circle.h"
+#include "Rectangle.h"
 
 int main(void) {
-	Animal* animal[2];
+	Ishape *ishape[2];
+	ishape[0] = new Circle;
+	ishape[1] = new Rectangle;
 
-	//犬と猫のインスタンスを生成
-	animal[0] = new Cat;
-	animal[1] = new Dog;
+	ishape[0]->Size();
+	ishape[1]->Size();
 
-	//それぞれなかせる
-	animal[0]->MakeSound();
-	animal[1]->MakeSound();
+	ishape[0]->Draw();
+	ishape[1]->Draw();
 
-	//削除
-	delete animal[0];
-	delete animal[1];
+	delete ishape[0];
+	delete ishape[1];
 }
