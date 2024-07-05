@@ -1,41 +1,29 @@
 ﻿#include <stdio.h>
-#include <windows.h>
-#include<stdlib.h>
-#include<time.h>
+#include <thread>
 
-typedef void (*pFunc)(int *);
-void DispResult(int* s);
-void SetTimeout(pFunc p, int second);
+void Thread1();
+void Thread2();
+void Thread3();
 
 int main() {
-	unsigned int currentTime = time(nullptr);
-	srand(currentTime);
-
-	pFunc p = DispResult;
-
-	int num = 0, num2 = rand() % 6 + 1;
-
-	printf("半なら1,丁なら2を入力してください\n");
-	scanf_s("%d", &num);
-
-	SetTimeout(p, 5);
-	printf("サイコロの目は%d", num2);
-
-	if ((num % 2) == (num2 % 2)) {
-		printf("正解\n");
-	}
-	else {
-		printf("不正解\n");
-	}
-
+	std::thread thread1(Thread1);
+	//待つ
+	thread1.join();
+	std::thread thread2(Thread2);
+	thread2.join();
+	std::thread thread3(Thread3);
+	thread3.join();
 	return 0;
 }
 
-void DispResult(int* s) {
-	printf("%d秒待った\n", *s);
+void Thread1() {
+	printf("thread1\n");
 }
 
-void SetTimeout(pFunc p, int second) {
-	Sleep(second * 1000);
-	p(&second);
+void Thread2() {
+	printf("thread2\n");
+}
+
+void Thread3() {
+	printf("thread3\n");
 }
